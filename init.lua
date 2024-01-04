@@ -88,7 +88,7 @@ require('lazy').setup({
 
       -- Useful status updates for LSP
       -- NOTE: `opts = {}` is the same as calling `require('fidget').setup({})`
-      { 'j-hui/fidget.nvim', opts = {} },
+      { 'j-hui/fidget.nvim',       opts = {} },
 
       -- Additional lua configuration, makes nvim stuff amazing!
       'folke/neodev.nvim',
@@ -113,7 +113,7 @@ require('lazy').setup({
   },
 
   -- Useful plugin to show you pending keybinds.
-  { 'folke/which-key.nvim', opts = {} },
+  { 'folke/which-key.nvim',        opts = {} },
   {
     -- Adds git related signs to the gutter, as well as utilities for managing changes
     'lewis6991/gitsigns.nvim',
@@ -136,6 +136,66 @@ require('lazy').setup({
         end
 
         -- Navigation
+        vim.keymap.set('i', 'jk', '<Esc>', { noremap = true })
+        vim.keymap.set('n', 'J', '5j', { noremap = true })
+        vim.keymap.set('n', 'K', '5k', { noremap = true })
+        vim.keymap.set({ 'n' }, '<leader>S', ':w<cr>', { noremap = true, desc = 'Save File' })
+
+        -- Pane navigation
+        vim.keymap.set('n', '<C-l>', '<C-w>l>', { noremap = true })
+        vim.keymap.set('n', '<C-h>', '<C-w>h>', { noremap = true })
+        vim.keymap.set('n', '<C-j>', '<C-w>j>', { noremap = true })
+        vim.keymap.set('n', '<C-k>', '<C-w>k>', { noremap = true })
+
+        -- TODO map leader q to quit file quickly
+        -- TODO map something to quickly open up directly listing(file explorer)
+        --
+        vim.keymap.set("n", "<leader>dl", vim.cmd.Ex, { desc = "Open Directory Listing NetRW" })
+
+        -- Move higlighted text up and down and also formatting as text is moved, like
+        -- in an if statement
+        vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv", { desc = "Move highlighted text up" })
+        vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv", { desc = "Move highlighted text down" })
+
+        -- Enhances regular NVIM J which appends the line after the current one to the
+        -- current line. However, this keeps the cursor at the front of the line rather
+        -- continously moving to the end of the line during sucessive uses.
+        vim.keymap.set("n", "<leader>j", "mzJ`z", { desc = "Append next line to current line" })
+        -- Half page jumping like usual but keep cursor in middle of screen for less
+        -- disorientation
+        vim.keymap.set("n", "<C-d>", "<C-d>zz")
+        vim.keymap.set("n", "<C-u>", "<C-u>zz")
+        -- Keep search target in the middle of the screen, less disorienting when doing
+        -- this a lot quickly
+        vim.keymap.set("n", "n", "nzzzv")
+        vim.keymap.set("n", "N", "Nzzzv")
+
+        -- Update to P but this keeps the original text that was pasted in the register
+        -- rather than the text that was removed being put into the register.
+        vim.keymap.set("x", "<leader>p", [["_dP]], { desc = 'Paste without replacing register' })
+
+        -- Yank text into OS clipboard which can be used outside of NVIM
+        vim.keymap.set({ "n", "v" }, "<leader>y", [["+y]], { desc = 'yank into OS clipboard' })
+        vim.keymap.set("n", "<leader>Y", [["+Y]], { desc = 'Yank into OS clipboard' })
+
+        -- Delete without adding to paste register
+        vim.keymap.set({ "n", "v" }, "<leader>d", [["_d]], { desc = 'Delete without adding to register' })
+
+        -- Switch between projects
+        vim.keymap.set("n", "<C-f>", "<cmd>silent !tmux neww tmux-sessionizer<CR>",
+          { desc = 'Switch between TMUX sessions' })
+        -- Format code
+        vim.keymap.set("n", "<leader>f", vim.lsp.buf.format, { desc = 'Format code' })
+
+        -- Quick fixes for errors
+        vim.keymap.set("n", "<C-k>", "<cmd>cnext<CR>zz")
+        vim.keymap.set("n", "<C-j>", "<cmd>cprev<CR>zz")
+        vim.keymap.set("n", "<leader>k", "<cmd>lnext<CR>zz")
+        vim.keymap.set("n", "<leader>j", "<cmd>lprev<CR>zz")
+
+        -- Replace the word that is under your cursor, start typing right away
+        vim.keymap.set("n", "<leader>s", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]])
+
         map({ 'n', 'v' }, ']c', function()
           if vim.wo.diff then
             return ']c'
@@ -211,7 +271,11 @@ require('lazy').setup({
       },
     },
   },
-
+  { 'terryma/vim-multiple-cursors' },
+  { 'mbbill/undotree' },
+  {
+    'luochen1990/rainbow'
+  },
   {
     -- Add indentation guides even on blank lines
     'lukas-reineke/indent-blankline.nvim',
@@ -257,8 +321,8 @@ require('lazy').setup({
   -- NOTE: Next Step on Your Neovim Journey: Add/Configure additional "plugins" for kickstart
   --       These are some example plugins that I've included in the kickstart repository.
   --       Uncomment any of the lines below to enable them.
-   require 'kickstart.plugins.autoformat',
-   require 'kickstart.plugins.debug',
+  require 'kickstart.plugins.autoformat',
+  require 'kickstart.plugins.debug',
 
   -- NOTE: The import below can automatically add your own plugins, configuration, etc from `lua/custom/plugins/*.lua`
   --    You can use this folder to prevent any conflicts with this init.lua if you're interested in keeping
@@ -514,8 +578,8 @@ local on_attach = function(_, bufnr)
   nmap('<leader>ws', require('telescope.builtin').lsp_dynamic_workspace_symbols, '[W]orkspace [S]ymbols')
 
   -- See `:help K` for why this keymap
-  nmap('K', vim.lsp.buf.hover, 'Hover Documentation')
-  nmap('<C-k>', vim.lsp.buf.signature_help, 'Signature Documentation')
+  nmap('<leader>k', vim.lsp.buf.hover, 'Hover Documentation')
+  nmap('<leader>K', vim.lsp.buf.signature_help, 'Signature Documentation')
 
   -- Lesser used LSP functionality
   nmap('gD', vim.lsp.buf.declaration, '[G]oto [D]eclaration')
@@ -564,9 +628,9 @@ require('mason-lspconfig').setup()
 --  define the property 'filetypes' to the map in question.
 local servers = {
   -- clangd = {},
-   gopls = {},
+  gopls = {},
   -- pyright = {},
-   rust_analyzer = {},
+  rust_analyzer = {},
   -- tsserver = {},
   -- html = { filetypes = { 'html', 'twig', 'hbs'} },
 
