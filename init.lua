@@ -223,11 +223,12 @@ require('lazy').setup({
         -- Format code
         vim.keymap.set("n", "<leader>f", vim.lsp.buf.format, { desc = 'Format code' })
 
+        -- TODO fix so they do not collide with pane navigation.
         -- Quick fixes for errors
-        vim.keymap.set("n", "<C-k>", "<cmd>cnext<CR>zz")
-        vim.keymap.set("n", "<C-j>", "<cmd>cprev<CR>zz")
-        vim.keymap.set("n", "<leader>k", "<cmd>lnext<CR>zz")
-        vim.keymap.set("n", "<leader>j", "<cmd>lprev<CR>zz")
+        --vim.keymap.set("n", "<C-k>", "<cmd>cnext<CR>zz")
+        --vim.keymap.set("n", "<C-j>", "<cmd>cprev<CR>zz")
+        --vim.keymap.set("n", "<leader>k", "<cmd>lnext<CR>zz")
+        --vim.keymap.set("n", "<leader>j", "<cmd>lprev<CR>zz")
 
         -- Replace the word that is under your cursor, start typing right away
         vim.keymap.set("n", "<leader>s", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]])
@@ -284,7 +285,11 @@ require('lazy').setup({
       end,
     },
   },
-
+  {
+    'mrcjkb/rustaceanvim',
+    version = '^3', -- Recommended
+    ft = { 'rust' },
+  },
   {
     -- Theme inspired by Atom
     'navarasu/onedark.nvim',
@@ -666,7 +671,7 @@ local servers = {
   -- clangd = {},
   gopls = {},
   -- pyright = {},
-  rust_analyzer = {},
+  -- rust_analyzer = {},
   -- tsserver = {},
   -- html = { filetypes = { 'html', 'twig', 'hbs'} },
 
