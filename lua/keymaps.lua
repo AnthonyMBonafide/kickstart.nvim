@@ -11,8 +11,6 @@ vim.keymap.set('n', '<C-j>', '<C-w>j>', { noremap = true })
 vim.keymap.set('n', '<C-k>', '<C-w>k>', { noremap = true })
 
 -- TODO map leader q to quit file quickly
--- TODO map something to quickly open up directly listing(file explorer)
---
 vim.keymap.set("n", "<leader>dl", vim.cmd.Ex, { desc = "Open Directory Listing NetRW" })
 
 -- Move higlighted text up and down and also formatting as text is moved, like
@@ -51,11 +49,11 @@ vim.keymap.set("n", "<C-f>", "<cmd>silent !tmux neww tmux-sessionizer<CR>",
 vim.keymap.set("n", "<leader>f", vim.lsp.buf.format, { desc = 'Format code' })
 
 -- TODO fix so they do not collide with pane navigation.
--- Quick fixes for errors
---vim.keymap.set("n", "<C-k>", "<cmd>cnext<CR>zz")
---vim.keymap.set("n", "<C-j>", "<cmd>cprev<CR>zz")
---vim.keymap.set("n", "<leader>k", "<cmd>lnext<CR>zz")
---vim.keymap.set("n", "<leader>j", "<cmd>lprev<CR>zz")
+-- Find out what this is suppose to do, becuase it does not work. Got from The Primeagen
+vim.keymap.set("n", "<leader>ck", "<cmd>cnext<CR>zz", { desc = "Next Issue" })
+vim.keymap.set("n", "<leader>cj", "<cmd>cprev<CR>zz", { desc = "Prev Issue" })
+vim.keymap.set("n", "<leader>cK", "<cmd>lnext<CR>zz", { desc = "Next quick fix" })
+vim.keymap.set("n", "<leader>cJ", "<cmd>lprev<CR>zz", { desc = "Prev Quick Fix" })
 
 -- Pane resizing
 vim.keymap.set("n", "<C-Up>", ":resize -2<CR>")
