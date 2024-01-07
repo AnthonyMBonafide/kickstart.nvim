@@ -57,6 +57,12 @@ vim.keymap.set("n", "<leader>f", vim.lsp.buf.format, { desc = 'Format code' })
 --vim.keymap.set("n", "<leader>k", "<cmd>lnext<CR>zz")
 --vim.keymap.set("n", "<leader>j", "<cmd>lprev<CR>zz")
 
+-- Pane resizing
+vim.keymap.set("n", "<C-Up>", ":resize -2<CR>")
+vim.keymap.set("n", "<C-Down>", ":resize +2<CR>")
+vim.keymap.set("n", "<C-Left>", ":vertical resize -2<CR>")
+vim.keymap.set("n", "<C-Right>", ":vertical resize +2<CR>")
+
 -- Replace the word that is under your cursor, start typing right away
 vim.keymap.set("n", "<leader>s", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]])
 -- [[ Basic Keymaps ]]

@@ -2,10 +2,6 @@ vim.cmd([[set guicursor=n-v-c:block,i-ci-ve:ver25,r-cr:hor20,o:hor50
   \,a:blinkwait700-blinkoff400-blinkon250-Cursor/lCursor
   \,sm:block-blinkwait175-blinkoff150-blinkon175]])
 --vim.cmd('set guicursor=a:blinkon100')
-vim.keymap.set("n", "<C-Up>", ":resize -2<CR>")
-vim.keymap.set("n", "<C-Down>", ":resize +2<CR>")
-vim.keymap.set("n", "<C-Left>", ":vertical resize -2<CR>")
-vim.keymap.set("n", "<C-Right>", ":vertical resize +2<CR>")
 vim.opt.nu = true
 vim.opt.relativenumber = true
 
