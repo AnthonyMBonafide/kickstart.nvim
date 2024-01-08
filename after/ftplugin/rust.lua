@@ -1,0 +1,1 @@
+-- vim.keymap.set('n', '<leader>cdb', vim.cmd.RustLsp('debuggables', 'last' --[[ optional ]]))
