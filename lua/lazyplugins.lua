@@ -31,6 +31,7 @@ require('lazy').setup({
 
   -- Detect tabstop and shiftwidth automatically
   'tpope/vim-sleuth',
+  'HiPhish/rainbow-delimiters.nvim',
   -- Auto save files
   {
     "okuuva/auto-save.nvim",
@@ -40,6 +41,20 @@ require('lazy').setup({
       -- your config goes here
       -- or just leave it empty :)
       debounce_delay = 1000, -- delay after which a pending save is executed
+    },
+  },
+  {
+    'windwp/nvim-autopairs',
+    event = "InsertEnter",
+    opts = {} -- this is equalent to setup({}) function
+  },
+  {
+    "folke/trouble.nvim",
+    dependencies = { "nvim-tree/nvim-web-devicons" },
+    opts = {
+      -- your configuration comes here
+      -- or leave it empty to use the default settings
+      -- refer to the configuration section below
     },
   },
   {
@@ -173,22 +188,36 @@ require('lazy').setup({
     ft = { 'rust' },
   },
   {
+    "folke/tokyonight.nvim",
+    lazy = false,
+    priority = 1000,
+    opts = {},
+  },
+  {
     -- Theme inspired by Atom
     'navarasu/onedark.nvim',
     priority = 1000,
     config = function()
-      vim.cmd.colorscheme 'onedark'
     end,
   },
 
   {
+    "catppuccin/nvim",
+    name = "catppuccin",
+    priority = 1000,
+    config = function()
+      vim.cmd.colorscheme "catppuccin"
+    end,
+  },
+  {
     -- Set lualine as statusline
     'nvim-lualine/lualine.nvim',
     -- See `:help lualine.txt`
+    dependencies = { 'nvim-tree/nvim-web-devicons' },
     opts = {
       options = {
         icons_enabled = false,
-        theme = 'onedark',
+        theme = 'catppuccin',
         component_separators = '|',
         section_separators = '',
       },
@@ -196,9 +225,6 @@ require('lazy').setup({
   },
   { 'terryma/vim-multiple-cursors' },
   { 'mbbill/undotree' },
-  {
-    'luochen1990/rainbow'
-  },
   {
     -- Add indentation guides even on blank lines
     'lukas-reineke/indent-blankline.nvim',
@@ -240,7 +266,13 @@ require('lazy').setup({
     },
     build = ':TSUpdate',
   },
-
+  {
+    'ggandor/leap.nvim',
+    dependencies = 'tpope/vim-repeat',
+    config = function()
+      require('leap').create_default_mappings()
+    end,
+  },
   -- NOTE: Next Step on Your Neovim Journey: Add/Configure additional "plugins" for kickstart
   --       These are some example plugins that I've included in the kickstart repository.
   --       Uncomment any of the lines below to enable them.
