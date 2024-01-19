@@ -1,7 +1,7 @@
 -- Navigation
 vim.keymap.set('i', 'jk', '<Esc>', { noremap = true })
-vim.keymap.set('n', 'J', '5j', { noremap = true })
-vim.keymap.set('n', 'K', '5k', { noremap = true })
+vim.keymap.set({ 'n', 'v' }, 'J', '5j', { noremap = true })
+vim.keymap.set({ 'n', 'v' }, 'K', '5k', { noremap = true })
 vim.keymap.set({ 'n' }, '<leader>S', ':w<cr>', { noremap = true, desc = 'Save File' })
 
 -- Pane navigation
@@ -15,8 +15,8 @@ vim.keymap.set("n", "<leader>dl", vim.cmd.Ex, { desc = "Open Directory Listing N
 
 -- Move higlighted text up and down and also formatting as text is moved, like
 -- in an if statement
-vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv", { desc = "Move highlighted text up" })
-vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv", { desc = "Move highlighted text down" })
+vim.keymap.set("v", "<C-k>", ":m '>+1<CR>gv=gv", { desc = "Move highlighted text up" })
+vim.keymap.set("v", "<C-j>", ":m '<-2<CR>gv=gv", { desc = "Move highlighted text down" })
 
 -- Enhances regular NVIM J which appends the line after the current one to the
 -- current line. However, this keeps the cursor at the front of the line rather
