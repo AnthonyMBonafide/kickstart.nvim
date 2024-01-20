@@ -57,6 +57,7 @@ require('lazy').setup({
       -- refer to the configuration section below
     },
   },
+  { "rafamadriz/friendly-snippets" },
   {
     'theHamsta/nvim-dap-virtual-text',
     requires = { 'mfussenegger/nvim-dap' },
@@ -105,8 +106,9 @@ require('lazy').setup({
     },
   },
 
+  { "lukas-reineke/indent-blankline.nvim", main = "ibl", opts = {} },
   -- Useful plugin to show you pending keybinds.
-  { 'folke/which-key.nvim',        opts = {} },
+  { 'folke/which-key.nvim',                opts = {} },
   {
     -- Adds git related signs to the gutter, as well as utilities for managing changes
     'lewis6991/gitsigns.nvim',
