@@ -2,7 +2,7 @@
 vim.keymap.set('i', 'jk', '<Esc>', { noremap = true })
 vim.keymap.set({ 'n', 'v' }, 'J', '5j', { noremap = true })
 vim.keymap.set({ 'n', 'v' }, 'K', '5k', { noremap = true })
-vim.keymap.set({ 'n' }, '<leader>S', ':w<cr>', { noremap = true, desc = 'Save File' })
+-- vim.keymap.set({ 'n' }, '<leader>S', ':w<cr>', { noremap = true, desc = 'Save File' })
 
 -- Pane navigation
 vim.keymap.set('n', '<C-l>', '<C-w>l>', { noremap = true })
@@ -10,8 +10,7 @@ vim.keymap.set('n', '<C-h>', '<C-w>h>', { noremap = true })
 vim.keymap.set('n', '<C-j>', '<C-w>j>', { noremap = true })
 vim.keymap.set('n', '<C-k>', '<C-w>k>', { noremap = true })
 
--- TODO map leader q to quit file quickly
-vim.keymap.set("n", "<leader>dl", vim.cmd.Ex, { desc = "Open Directory Listing NetRW" })
+vim.keymap.set("n", "<leader>dl", "<cmd>NvimTreeToggle<CR>", { desc = "Open Directory Listing" })
 
 -- Move higlighted text up and down and also formatting as text is moved, like
 -- in an if statement
@@ -61,8 +60,10 @@ vim.keymap.set("n", "<C-Down>", ":resize +2<CR>")
 vim.keymap.set("n", "<C-Left>", ":vertical resize -2<CR>")
 vim.keymap.set("n", "<C-Right>", ":vertical resize +2<CR>")
 
+vim.keymap.set("n", "<leader>sl", "<Plug>(leap-forward-to)", { desc = "Move forward inclusive of target" })
+vim.keymap.set("n", "<leader>Sl", "<Plug>(leap-backward-to)", { desc = "Move forward inclusive of target" })
 -- Replace the word that is under your cursor, start typing right away
-vim.keymap.set("n", "<leader>s", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]])
+-- vim.keymap.set("n", "<leader>s", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]])
 -- [[ Basic Keymaps ]]
 
 -- Keymaps for better default experience
