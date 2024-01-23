@@ -6,6 +6,18 @@
 -- be extended to other languages as well. That's why it's called
 -- kickstart.nvim and not kitchen-sink.nvim ;)
 
+---@param config {args?:string[]|fun():string[]?}
+local function get_args(config)
+  local args = type(config.args) == "function" and (config.args() or {}) or config.args or {}
+  config = vim.deepcopy(config)
+  ---@cast args string[]
+  config.args = function()
+    local new_args = vim.fn.input("Run with args: ", table.concat(args, " ")) --[[@as string]]
+    return vim.split(vim.fn.expand(new_args) --[[@as string]], " ")
+  end
+  return config
+end
+
 return {
   -- NOTE: Yes, you can install new plugins here!
   'mfussenegger/nvim-dap',
@@ -44,6 +56,7 @@ return {
 
     -- Basic debugging keymaps, feel free to change to your liking!
     vim.keymap.set('n', '<F5>', dap.continue, { desc = 'Debug: Start/Continue' })
+    vim.keymap.set('n', '<F6>', function() require("dap").continue({ before = get_args }) end, { desc = "Run with Args" })
     vim.keymap.set('n', '<F1>', dap.step_into, { desc = 'Debug: Step Into' })
     vim.keymap.set('n', '<F2>', dap.step_over, { desc = 'Debug: Step Over' })
     vim.keymap.set('n', '<F3>', dap.step_out, { desc = 'Debug: Step Out' })
