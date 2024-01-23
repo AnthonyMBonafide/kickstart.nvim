@@ -39,7 +39,7 @@ vim.keymap.set({ "n", "v" }, "<leader>y", [["+y]], { desc = 'yank into OS clipbo
 vim.keymap.set("n", "<leader>Y", [["+Y]], { desc = 'Yank into OS clipboard' })
 
 -- Delete without adding to paste register
-vim.keymap.set({ "n", "v" }, "<leader>d", [["_d]], { desc = 'Delete without adding to register' })
+-- vim.keymap.set({ "n", "v" }, "<leader>d", [["_d]], { desc = 'Delete without adding to register' })
 
 -- Switch between projects
 vim.keymap.set("n", "<C-f>", "<cmd>silent !tmux neww tmux-sessionizer<CR>",
